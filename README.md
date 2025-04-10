@@ -1,5 +1,3 @@
-# fun_sales_pitch_website
-
 # AI-Powered Website Sales pitch & Brochure Generator
 
 ## Description
