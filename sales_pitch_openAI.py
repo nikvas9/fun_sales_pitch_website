@@ -1,5 +1,5 @@
 """
-
+This is a multishot LLM Model
 Must have .env file in the same folder:
   File name: ".env" //without quotes
   File contents:OPENAI_API_KEY=sk-proj <paste your OpenAI key from https://platform.openai.com/settings/organization/api-keys here, something like "sk-proj......">
@@ -156,6 +156,29 @@ class Website:
             print(f"An unexpected error occurred in get_relevant_links: {e}", file=sys.stderr)
             return {"error": "Unexpected error during link analysis", "details": str(e)}
 
+    def translater(company_name, url, language_from, language_to):
+        # Assuming you have a function to translate text
+        # This is a placeholder for the actual translation logic
+        data = Website.create_brochure(company_name, url)
+        if not data:
+            print("No data to translate.")
+            return None
+        try:
+            response = openai.chat.completions.create(
+                model=MODEL,
+                messages=[
+                    {"role": "system", "content": f"You are a translator from {language_from} to {language_to}."},
+                    {"role": "user", "content": data}
+                ],
+            )
+            data = response.choices[0].message.content
+            print("Translation completed successfully.")
+            print("Translated text:", data)
+        except Exception as e:
+            print(f"Error during translation: {e}")
+            return None
+        # Assuming the response contains the translated text
+        return f"Translated from {language_from} to {language_to}: {data}"
 
 # --- Execution ---
 if __name__ == "__main__":
