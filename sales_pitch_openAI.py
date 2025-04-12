@@ -163,6 +163,7 @@ class Website:
         if not data:
             print("No data to translate.")
             return None
+        if language_from = language_to return data
         try:
             response = openai.chat.completions.create(
                 model=MODEL,
@@ -182,7 +183,10 @@ class Website:
 
 # --- Execution ---
 if __name__ == "__main__":
-    target_url = "https://edwarddonner.com"
+    company_name = "Example company"
+    target_url = "https://example.com"
+    translate_from = "English"
+    translate_to = "Spanish"
     print(f"Fetching and analyzing links for: {target_url}")
 
     # Create an instance of the Website class
@@ -195,7 +199,7 @@ if __name__ == "__main__":
          sys.exit(1)
 
     # Call the instance method to get relevant links
-    relevant_links_data = website_obj.get_relevant_links()
+    sales_brochure = website_obj.translater(company_name, target_url, translate_from, translate_to)
 
     # Print the result
     print("\nRelevant links analysis result:")
